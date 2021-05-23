@@ -26,6 +26,7 @@ class App extends React.Component {
                     type="radio"
                     name="cluster"
                     value="kmeans"
+                    defaultChecked
                     onClick={() => this.onSelectCluster("kmeans")}
                   />{" "}
                   K-MEANS
