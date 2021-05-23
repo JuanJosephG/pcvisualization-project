@@ -1,0 +1,7 @@
+body {
+    background: rgb(176, 181, 189);
+  }
+  
+  .label {
+    text-transform: capitalize;
+  }  
