@@ -1,8 +1,10 @@
 import * as d3 from "d3";
+// import {event as currentEvent} from 'd3';
 
 let kmeansUrl = "/kmeans.json";
 let dbscanUrl = "/dbscan.json";
 let kmediods = "/kmediods.json";
+
 
 export default class BarChartWrapper {
   constructor(element) {
@@ -66,7 +68,7 @@ export default class BarChartWrapper {
       .scaleBand()
       .range([0, this.width])
       .paddingInner(0.2)
-      .paddingOuter(0.5);
+      .paddingOuter(0.5)
   }
 
   Labels() {
@@ -78,7 +80,7 @@ export default class BarChartWrapper {
       .attr("font-size", "20px")
       .attr("x", -(this.height / 2))
       .attr("y", -50)
-      .text("Power Consumption (kwh)");
+      .text("Consumo Energético (kwh)");
 
     this.xLabel = this.svg
       .append("text")
@@ -90,7 +92,7 @@ export default class BarChartWrapper {
   }
 
   update(cluster) {
-    this.xLabel.text("Cluster with " + cluster || "kmeans");
+    this.xLabel.text("Clusters con " + cluster || "kmeans");
     this.data = cluster === "kmeans" ? this.kmeansData : cluster === "dbscan" ? this.dbscanData : this.kmediodsData;
     this.y.domain([
       d3.min(this.data, d => d.height) * 0.99,
@@ -102,8 +104,10 @@ export default class BarChartWrapper {
     this.yAxis.call(d3.axisLeft(this.y));
 
     // Data Join
-    this.rects = this.svg.selectAll("rect").data(this.data);
+    this.rects = this.svg.selectAll("rect").data(this.data)
 
+    // this.tooltip = d3.select("body").append("div").attr("background", "#cccccc").style("position", "absolute").style('border', '1px #000000 solid').style('border-radius', '5px').style("visibility", "hide").text("Simple text")
+                        
     // Exit
     this.rects
       .exit()
@@ -120,7 +124,7 @@ export default class BarChartWrapper {
       .attr("x", d => this.x(d.name))
       .attr("y", d => this.y(d.height))
       .attr("width", this.x.bandwidth)
-      .attr("height", d => this.height - this.y(d.height));
+      .attr("height", d => this.height - this.y(d.height))
 
     // Enter Data
     this.rects
@@ -130,6 +134,14 @@ export default class BarChartWrapper {
       .attr("y", this.height)
       .attr("width", this.x.bandwidth)
       .attr("fill", "#2b86d6")
+      .on('mouseover', function (d) {
+        d3.select(this)
+            .attr('fill', '#071c94')
+      })
+      .on('mouseout', function () {
+        d3.select(this)
+            .attr('fill', '#2b86d6')
+      })
       .attr("height", 0)
       .attr("fill-opacity", 0)
       .transition()
@@ -139,3 +151,8 @@ export default class BarChartWrapper {
       .attr("fill-opacity", 1);
   }
 }
+
+// div .html(d => this.x(d.name))
+// .attr('fill', '#071c94')
+// .style("left", (currentEvent.pageX + 10) + "px")
+// .style("top", (currentEvent.pageY - 15) + "px");

@@ -20,7 +20,7 @@ class App extends React.Component {
             <Row>
               <Col xs={12}>
                 <br />
-                <h2>Select your Cluster</h2>
+                <h2>Selecciona el método de clusterización</h2>
                 <label>
                   <input
                     type="radio"
