@@ -7,11 +7,18 @@ El siguiente trabajo corresponde a la fase número 3 correspondiente al proyecto
 Deberá tener [Node](https://nodejs.org/es/) para poder ejecutar el proyecto
 
 ## Ejecutar el Proyecto:
+Clonar el repositorio
+`$git@github.com:JuanJosephG/pcvisualization-project.git`
 
-En el directorio del proyecto `d3-visualization-project`, ejecutar lo siguiente:
+Ubicarse en el siguiente directorio:
+`$/d3-visualization-project`
 
-`yarn install`
-`yarn start`
+Ejecutar los siguientes comando:
+`$ yarn install`
+`$ yarn start`
+
+La app deberá desplegarse en un navegador web de su elección con la siguiente ruta:
+http://localhost:3000/
 
 ## Otras consideraciones
 La aplicación web ha sido desplegado en netlify.
